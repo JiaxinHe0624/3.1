@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudyTrack | Task Manager</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+    <!-- Same four links as the home page, only "active" moves.
+         Copying the header by hand keeps each page readable. -->
+    <header class="site-header">
+        <div class="nav-inner">
+            <a class="logo" href="index.html">StudyTrack</a>
+            <nav class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="tasks.html" class="active">Task Manager</a>
+                <a href="blog.html">Project Blog</a>
+                <a href="ethics.html">Ethics &amp; Privacy</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+
+        <!-- Login gate. Nothing below this box is visible until
+             js/tasks.js accepts the username and password. -->
+        <section class="card login-card" id="loginSection">
+            <h2>Sign in</h2>
+            <p class="login-hint">Demo account: student / INFO1012</p>
+
+            <form id="loginForm">
+                <label for="username">Username</label>
+                <input id="username" type="text" autocomplete="username" placeholder="student">
+
+                <label for="password">Password</label>
+                <input id="password" type="password" autocomplete="current-password" placeholder="INFO1012">
+
+                <!-- Empty on purpose: JavaScript writes the message here
+                     so the page does not show a permanent red line. -->
+                <p class="error" id="loginError"></p>
+
+                <button class="btn" type="submit">Sign in</button>
+            </form>
+        </section>
+
+        <!-- The task area itself. 'hidden' is display: none, so the
+             elements exist but nobody can see them yet. -->
+        <div id="appSection" class="hidden">
+
+            <h1 class="page-title">My study tasks</h1>
+            <button class="btn-outline signout-btn" id="logoutBtn" type="button">Sign out</button>
+
+            <!-- Form and table come in the next step. -->
+
+            <footer class="site-footer">
+                <p>Current date and time: <span id="clock"></span></p>
+            </footer>
+
+        </div>
+
+    </main>
+
+    <script src="../js/tasks.js"></script>
+</body>
+</html>
