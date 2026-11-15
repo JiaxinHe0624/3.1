@@ -3,15 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Study Planner | Home</title>
+    <title>StudyTrack | Home</title>
+    <meta name="description" content="StudyTrack is a web based study task manager that helps students plan assignments, revision and quizzes in one place.">
+    <!-- Shared stylesheet. The page sits in html/, so the path steps up one level. -->
     <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
 
-    <header>
-        <div class="container nav-bar">
-            <a class="logo" href="index.html">Study Planner</a>
-            <nav>
+    <!-- ================= Top navigation =================
+         The same four links appear on every page of the site,
+         so the layout stays consistent between pages. -->
+    <header class="site-header">
+        <div class="nav-inner">
+            <a class="logo" href="index.html">StudyTrack</a>
+            <nav class="nav-links">
                 <a href="index.html" class="active">Home</a>
                 <a href="tasks.html">Task Manager</a>
                 <a href="blog.html">Project Blog</a>
@@ -21,55 +26,98 @@
     </header>
 
     <main class="container">
-        <!--hero part-->
-        <section class="hero">
-            <h1>Study Planner</h1>
-            <p class="lead">Keep every assignment, revision block and quiz deadline in one list.</p>
-            <a class="btn" href="tasks.html">Open my list</a>
 
-            <img id="heroImage" src="../images/study-1.jpg"
-                 alt="A study desk with a laptop and lecture notes">
-            <button id="cycleImageBtn" class="btn-outline" type="button">Change image</button>
-            <p id="imageCaption" class="caption">Image 1 of 3</p>
+        <!-- ================= Hero ================= -->
+        <section class="hero">
+            <div class="hero-text">
+                <h1>StudyTrack</h1>
+                <p class="hero-subtitle">
+                    A study task manager that keeps every assignment, revision block
+                    and quiz deadline for the semester in one list.
+                </p>
+                <a class="btn" href="tasks.html">Open my task list</a>
+            </div>
+
+            <!-- The image is swapped by js/home.js when the button is pressed.
+                 The three pictures share one space so the layout does not jump. -->
+            <figure class="hero-figure">
+                <img id="heroImage" src="../images/study-1.jpg"
+                     alt="A desk set up for a revision session, with a laptop and lecture notes">
+                <button id="cycleImageBtn" class="btn btn-outline" type="button">Change image</button>
+                <figcaption id="imageCaption">Image 1 of 3: a desk set up for a revision session</figcaption>
+            </figure>
         </section>
-        <!--APP introduct-->
-        <section class="card">
-            <h2>About the App</h2>
-            <p>
-                Many students juggle multiple classes at the same time. They usually write down their assignments on paper or spreadsheets, but these get messy fast when several deadlines pile up in one week. Study Planner puts all your schoolwork in one simple list.
-            </p>
-            <p>
-                Each task has a title, the class it is for, a deadline and extra notes. The list sorts by due date, so your most urgent work shows up at the top. Everything saves locally in your browser — you wonot lose your task list even if you refresh the page.
-            </p>
-            <h3>Key features</h3>
-            <ul>
-                <li>Add a study task: fill in the task title, course code, course name, due date, description and notes.</li>
-                <li>Edit or remove tasks you have already made; you will get a pop-up check before anything gets deleted.</li>
-                <li>See all your tasks laid out in a table. Any work that is past due will stand out.</li>
-                <li>It checks your input: you can not leave boxes blank or pick a date that does not make sense.</li>
-                <li>Login required before the task page opens.</li>
-            </ul>
+
+        <!-- ================= About the App ================= -->
+        <section class="about-app">
+            <article class="card">
+                <h2>About the App</h2>
+                <p>
+                    StudyTrack is a web based study task management system built for
+                    students who are enrolled in several courses at the same time.
+                    Most people start a semester with a paper list or a spreadsheet,
+                    and both become hard to keep accurate once three or four
+                    assessments land in the same week.
+                </p>
+                <p>
+                    The application keeps one central list of study tasks. Each task
+                    records a title, the course it belongs to, a due date, a short
+                    description and any extra notes. Tasks can be added, edited or
+                    deleted from a single page, and the list is sorted by due date so
+                    the most urgent work is always at the top.
+                </p>
+
+                <h3>Key features</h3>
+                <ul class="feature-list">
+                    <li>Create a study task with a course code, course name, due date and notes.</li>
+                    <li>Update an existing task when a deadline moves.</li>
+                    <li>Delete a task only after a confirmation dialog.</li>
+                    <li>View every task in one table, with overdue items highlighted.</li>
+                    <li>Validation rejects empty required fields and impossible dates.</li>
+                    <li>A login gate keeps the task list private on a shared computer.</li>
+                </ul>
+            </article>
         </section>
-        <!--own part-->>
-        <section class="card">
-            <h2>About Me</h2>
-            <p>
-                I am Jiaxin He, a second year Computer Science and Technology student at
-                the Ander College of Xi'an University of Architecture and Technology.
-            </p>
-            <p>
-                I am interested in programming and information systems. I plan my week by
-                splitting each assessment into several short blocks and scheduling them
-                before the deadline, which is what this application is built around.
-            </p>
+
+        <!-- ================= About Me ================= -->
+        <section class="about-me">
+            <article class="card">
+                <h2>About Me</h2>
+                <p>
+                    My name is Jiaxin He, and I am a second year student in the Computer
+                    Science and Technology programme at the Ander College of Xi'an
+                    University of Architecture and Technology.
+                </p>
+                <p>
+                    My academic interests are programming, databases and information
+                    systems, and I am working towards a career in software development.
+                    Outside class I spend time on volunteer activities and I play games
+                    with friends, which is also how I switch off after a long study day.
+                </p>
+                <p>
+                    I used to plan my semester in a paper notebook: every assessment was
+                    written down, split into smaller blocks and ticked off once finished.
+                    The problem was that the notebook could not sort anything, so in the
+                    weeks when four courses were due at once I would constantly re-copy
+                    the same list. StudyTrack is the version of that notebook I actually
+                    wanted: the same tasks, sorted by due date, with anything overdue
+                    shown in red.
+                </p>
+                <p>
+                    More of my work is on my personal site:
+                    <a href="https://jiaxinhe0624.github.io/JiaxinHe-website/" target="_blank" rel="noopener">jiaxinhe0624.github.io/JiaxinHe-website</a>
+                </p>
+            </article>
         </section>
 
     </main>
 
-    <footer>
-        <p>Study Planner &middot; INFO1012 &middot; Assessment 3.1 &middot; Jiaxin He</p>
+    <footer class="site-footer">
+        <p>StudyTrack &middot; INFO1012 Information Technology Systems &middot; Assessment 3.1 &middot; Jiaxin He</p>
     </footer>
 
+    <!-- Shared helper first, then the home page behaviour -->
+    <script src="../js/common.js"></script>
     <script src="../js/home.js"></script>
 </body>
 </html>

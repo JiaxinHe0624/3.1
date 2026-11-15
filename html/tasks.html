@@ -8,8 +8,6 @@
 </head>
 <body>
 
-    <!-- Same four links as the home page, only "active" moves.
-         Copying the header by hand keeps each page readable. -->
     <header class="site-header">
         <div class="nav-inner">
             <a class="logo" href="index.html">StudyTrack</a>
@@ -24,8 +22,8 @@
 
     <main class="container">
 
-        <!-- Login gate. Nothing below this box is visible until
-             js/tasks.js accepts the username and password. -->
+        <!-- Login gate. Nothing below is visible until tasks.js
+             accepts the username and password. -->
         <section class="card login-card" id="loginSection">
             <h2>Sign in</h2>
             <p class="login-hint">Demo account: student / INFO1012</p>
@@ -37,23 +35,79 @@
                 <label for="password">Password</label>
                 <input id="password" type="password" autocomplete="current-password" placeholder="INFO1012">
 
-                <!-- Empty on purpose: JavaScript writes the message here
-                     so the page does not show a permanent red line. -->
+                <!-- Left empty: JavaScript writes the message here. -->
                 <p class="error" id="loginError"></p>
 
                 <button class="btn" type="submit">Sign in</button>
             </form>
         </section>
 
-        <!-- The task area itself. 'hidden' is display: none, so the
-             elements exist but nobody can see them yet. -->
+        <!-- The task area. All of it is hidden until sign in succeeds. -->
         <div id="appSection" class="hidden">
 
             <h1 class="page-title">My study tasks</h1>
             <button class="btn-outline signout-btn" id="logoutBtn" type="button">Sign out</button>
 
-            <!-- Form and table come in the next step. -->
+            <!-- One form does both jobs: adding a new task, and editing
+                 an existing one. The heading and button label change
+                 to tell the user which mode they are in. -->
+            <section class="card">
+                <h2 id="formTitle">Add a task</h2>
 
+                <form id="taskForm">
+                    <label for="taskTitle">Task title</label>
+                    <input id="taskTitle" type="text" placeholder="INFO1012 assignment 3 report">
+                    <p class="error" id="titleError"></p>
+
+                    <label for="courseCode">Course code</label>
+                    <input id="courseCode" type="text" placeholder="INFO1012">
+                    <p class="error" id="courseCodeError"></p>
+
+                    <label for="courseName">Course name</label>
+                    <input id="courseName" type="text" placeholder="Information Technology Systems">
+                    <p class="error" id="courseNameError"></p>
+
+                    <label for="dueDate">Due date</label>
+                    <input id="dueDate" type="date">
+                    <p class="error" id="dueDateError"></p>
+
+                    <label for="description">Description</label>
+                    <textarea id="description" rows="3" placeholder="What the task involves"></textarea>
+                    <p class="error" id="descriptionError"></p>
+
+                    <label for="notes">Extra notes (optional)</label>
+                    <textarea id="notes" rows="2" placeholder="Anything else worth remembering"></textarea>
+
+                    <button class="btn" type="submit" id="submitBtn">Add task</button>
+                    <button class="btn-outline hidden" id="cancelEditBtn" type="button">Cancel edit</button>
+                </form>
+            </section>
+
+            <!-- The whole list, sorted by due date. -->
+            <section class="card">
+                <h2>All tasks</h2>
+
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Course</th>
+                                <th>Due</th>
+                                <th>Description</th>
+                                <th>Notes</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="taskTableBody"></tbody>
+                    </table>
+                </div>
+
+                <p class="login-hint" id="emptyMessage">No tasks yet. Add the first one above.</p>
+            </section>
+
+            <!-- The brief asks for the current date and time at the
+                 bottom of the task page. tasks.js keeps it ticking. -->
             <footer class="site-footer">
                 <p>Current date and time: <span id="clock"></span></p>
             </footer>

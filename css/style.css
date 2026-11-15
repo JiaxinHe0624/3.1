@@ -359,3 +359,50 @@ form textarea:focus {
 .signout-btn {
     margin-bottom: 20px;
 }
+/* Blog page: code blocks and screenshots. Code needs a monospace
+   font so indentation lines up, and its own scroll area so a long
+   line does not break the card layout. */
+.code-block {
+    background: #f2f9ff;
+    border: 1px solid var(--line);
+    border-left: 4px solid var(--blue);
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin: 10px 0 16px;
+    overflow-x: auto;
+    font-family: Consolas, "Courier New", monospace;
+    font-size: 14px;
+    line-height: 1.6;
+    color: #2a4a5e;
+    white-space: pre;
+}
+
+/* Each bug gets its own bordered block so the reader can see where
+   one problem ends and the next begins. */
+.bug-block {
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    padding: 16px 18px;
+    margin: 18px 0;
+    background: #fbfdff;
+}
+
+.bug-block h3 {
+    margin-top: 0;
+}
+
+.screenshot {
+    margin: 10px 0 16px;
+    text-align: center;
+}
+
+.screenshot img {
+    border: 1px solid var(--line);
+    border-radius: 10px;
+    margin: 0 auto 6px;
+}
+
+.screenshot figcaption {
+    font-size: 13px;
+    color: #6b8a9c;
+}

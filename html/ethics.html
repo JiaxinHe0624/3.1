@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudyTrack | Ethics &amp; Privacy</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+    <!-- Same four links as every other page, only "active" moves. -->
+    <header class="site-header">
+        <div class="nav-inner">
+            <a class="logo" href="index.html">StudyTrack</a>
+            <nav class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="tasks.html">Task Manager</a>
+                <a href="blog.html">Project Blog</a>
+                <a href="ethics.html" class="active">Ethics &amp; Privacy</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+
+        <h1 class="page-title">Ethics &amp; Privacy</h1>
+        <p class="login-hint">
+            What data this application handles, which parts of it protect the
+            user, and where the limits of a browser only design actually are.
+        </p>
+
+        <!-- ================= 1 ================= -->
+        <section class="card">
+            <h2>1. What data the application collects</h2>
+            <p>
+                StudyTrack collects the minimum needed to answer one question:
+                which piece of work is due next. That is a task title, a course
+                code, a course name, a due date, a short description and optional
+                notes. Nothing else is stored: no student number, no email
+                address, no location, no device information and no browsing
+                behaviour.
+            </p>
+            <p>
+                Everything is written to <code>localStorage</code> in the user's
+                own browser. It is never sent to a server, because there is no
+                server and no database in this project. That means the data never
+                leaves the machine it was typed on, and I as the author never see
+                another person's task list. The trade-off is that the list is
+                tied to one browser on one computer: a different device starts
+                empty. That limitation is a privacy decision, not an oversight.
+            </p>
+        </section>
+
+        <!-- ================= 2 ================= -->
+        <section class="card">
+            <h2>2. Features that support ethical data use</h2>
+
+            <h3>Input validation rejects bad and unsafe data</h3>
+            <p>
+                Every required field is checked before a task is saved. An empty
+                title, an empty course code, an empty description or an
+                impossible date such as 30 February is refused, and the message
+                appears under the field that failed so the user knows what to
+                change. Validating in the browser also keeps unusable records out
+                of storage in the first place, which is easier to defend than
+                cleaning a corrupted list later.
+            </p>
+            <p>
+                Text is also treated as text. The table is built with
+                <code>textContent</code> rather than <code>innerHTML</code>, so a
+                task title containing HTML or a script tag is displayed as
+                ordinary characters and can never execute. That is a privacy and
+                safety measure as much as a security one: a shared computer
+                should not let one person's note affect another person's page.
+            </p>
+
+            <h3>A login gate keeps the list off a shared screen</h3>
+            <p>
+                The task page is hidden until a username and password are
+                accepted, so opening the site on a library or lab computer does
+                not expose the previous user's deadlines. Signing out clears the
+                session flag and empties both inputs, and because the flag lives in
+                <code>sessionStorage</code> rather than
+                <code>localStorage</code>, closing the tab or the browser ends
+                the session automatically. A person who walks away without
+                signing out is still logged out by the next person's fresh
+                session.
+            </p>
+
+            <h3>Only necessary data, and the user can remove it</h3>
+            <p>
+                There is no registration form, so no personal details are
+                required to use the app. The user can delete any task, and
+                deleting a task removes it from storage rather than hiding it.
+                The only thing that persists without an obvious delete button is
+                the task list itself, which is the whole purpose of the
+                application.
+            </p>
+        </section>
+
+        <!-- ================= 3 ================= -->
+        <section class="card">
+            <h2>3. Specific examples in the code</h2>
+
+            <h3>Example 1: impossible dates are rejected, not silently corrected</h3>
+            <p>
+                A date input can return <code>2026-02-30</code>. If that value is
+                passed straight to <code>new Date()</code> the browser rolls it
+                forward to 2 March and the user's deadline quietly changes
+                without any warning. <code>isValidDate()</code> reads the year,
+                month and day back out of the object and compares them with what
+                was typed, so a date that does not exist is refused and explained.
+                A wrong due date is not a small problem in a study planner: the
+                whole purpose of the list is to tell someone when work is due.
+            </p>
+
+            <h3>Example 2: the login flag is session scoped</h3>
+            <p>
+                The signed in flag is stored under
+                <code>studyplanner.session</code> in <code>sessionStorage</code>.
+                Using <code>localStorage</code> would have been simpler and would
+                have kept the user signed in for weeks, which is convenient for
+                one person on a home laptop and careless on a shared computer.
+                Choosing the narrower storage was a deliberate decision about
+                who else might use the machine.
+            </p>
+
+            <h3>Example 3: no third party code, no tracking</h3>
+            <p>
+                The site uses no analytics, no advertising script, no tracking
+                pixel and no external content that would report the visitor's IP
+                address to another company. Fonts fall back to the operating
+                system's own fonts instead of calling a font service, and all
+                four pages are plain HTML, CSS and JavaScript written for this
+                project. Fewer outside requests means fewer organisations holding
+                data about the user.
+            </p>
+
+            <h3>Example 4: deletion asks first</h3>
+            <p>
+                Deleting a task opens a confirmation dialog that names the task
+                and states that the action cannot be undone. Losing a deadline
+                because of a misclick is a data loss event for the user, and one
+                confirmation step is enough to prevent it without making the app
+                annoying.
+            </p>
+        </section>
+
+        <!-- ================= 4 ================= -->
+        <section class="card">
+            <h2>4. What this design cannot do, stated plainly</h2>
+            <p>
+                Being honest about the limits matters more than claiming
+                protection the code does not provide.
+            </p>
+            <ul class="feature-list">
+                <li>
+                    The login is a front end gate, not authentication. The
+                    username and password sit in <code>tasks.js</code> and anyone
+                    who opens the source can read them and bypass the gate through
+                    DevTools. It stops a casual passer-by, not a determined one,
+                    and it would be unacceptable for real student records.
+                </li>
+                <li>
+                    Anything in <code>localStorage</code> is readable by anyone
+                    with access to that browser profile, and is not encrypted.
+                    There is no concept of separate accounts, so two people on one
+                    computer share one list unless one of them clears site data.
+                </li>
+                <li>
+                    There is no backup. Clearing browser data, using private
+                    mode or switching devices loses the list permanently, and the
+                    app cannot recover it because it kept no copy.
+                </li>
+                <li>
+                    A real deployment for students would need a server with
+                    proper authentication, encryption in transit, separate
+                    accounts, an access log and a retention policy. Those are the
+                    responsibilities that come with holding other people's data,
+                    and this project deliberately avoids them by holding nothing
+                    centrally.
+                </li>
+            </ul>
+        </section>
+
+        <!-- ================= 5 ================= -->
+        <section class="card">
+            <h2>5. My understanding of responsibility for user data</h2>
+            <p>
+                The Australian Privacy Principles require, in outline, that an
+                organisation collects only the personal information it needs,
+                tells people why it is collecting it, protects it, and destroys
+                or de-identifies it when it is no longer required. A small course
+                project is not an organisation, but the same four questions apply
+                to it and were the ones I used while building this: do I need
+                this field, does the user know it is being stored, is it
+                protected to the standard the data deserves, and can it be
+                removed.
+            </p>
+            <p>
+                The conclusion I reached is that the safest way to look after
+                other people's data is not to hold it. This app stores what a
+                student typed about their own study plan, in their own browser,
+                for their own use. There is no central copy to leak, no account to
+                breach and no database to sell. Where the design does hold
+                information - the task list and the session flag - it holds the
+                narrowest version, in the shortest lived storage, and gives the
+                user a delete button.
+            </p>
+            <p>
+                The part I would change first in a real version is the login. A
+                password written into a script is not a password; it is a label.
+                Real authentication belongs on a server, and until that exists
+                the gate should be described as a privacy screen rather than as
+                security. Understanding that difference is, I think, the main
+                thing this project taught me about responsibility for user
+                data.
+            </p>
+        </section>
+
+    </main>
+
+    <footer class="site-footer">
+        <p>StudyTrack &middot; INFO1012 Information Technology Systems &middot; Assessment 3.1 &middot; Jiaxin He</p>
+    </footer>
+
+</body>
+</html>

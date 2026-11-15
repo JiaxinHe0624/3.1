@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StudyTrack | Project Blog</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+    <header class="site-header">
+        <div class="nav-inner">
+            <a class="logo" href="index.html">StudyTrack</a>
+            <nav class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="tasks.html">Task Manager</a>
+                <a href="blog.html" class="active">Project Blog</a>
+                <a href="ethics.html">Ethics &amp; Privacy</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="container">
+
+        <h1 class="page-title">Project Blog</h1>
+        <p class="login-hint">
+            A record of how StudyTrack was planned with Agile, and the two bugs
+            that took the longest to find.
+        </p>
+
+        <!-- ================= Part 1: Agile ================= -->
+        <section class="card">
+            <h2>1. Agile methodology and how it applied to this project</h2>
+
+            <h3>What Agile is</h3>
+            <p>
+                Agile is a way of building software in small increments instead
+                of writing the whole product before testing any of it. The
+                approach was formalised in the Agile Manifesto (2001), which
+                places four things above their alternatives: working software
+                over comprehensive documentation, responding to change over
+                following a plan, collaboration over contract negotiation, and
+                individuals over processes and tools. The point is not that the
+                right hand column has no value, but that the left hand column
+                has more value.
+            </p>
+            <p>
+                Agile is delivered through short cycles called sprints. A sprint
+                is a fixed length of work that ends with a usable increment. Each
+                sprint follows the same shape: <strong>Planning</strong> chooses
+                what to build from a prioritised backlog, <strong>Analysis</strong>
+                works out what the requirement really means,
+                <strong>Design</strong> decides the structure,
+                <strong>Implementation</strong> writes the code, and
+                <strong>Testing and Maintenance</strong> checks the increment and
+                fixes what broke. A sprint review asks whether the increment is
+                usable, and a retrospective asks what the process should change
+                next time. Scrum, Kanban and Extreme Programming are all specific
+                ways of running these cycles.
+            </p>
+
+            <h3>Why it suited a three week web project</h3>
+            <p>
+                The assessment set out four pages in a fixed order, and each page
+                could be checked in a browser before the next one started. That
+                is the same shape as a backlog being worked off in sprints. Agile
+                also fit because the requirements arrived as a long list of small
+                points: colours, navigation, a login gate, a confirmation dialog,
+                a live clock. Working in increments meant each point could be
+                marked off individually, rather than discovered to be missing at
+                the end.
+            </p>
+
+            <h3>How I applied it here</h3>
+            <p>
+                I treated the numbered assessment requirements as a product
+                backlog: every point became a task, ordered by weight, so the
+                40% HTML and CSS items came before the blog and ethics pages. I
+                ran three one-week sprints, each ending with a working site in
+                the browser, then used the sprint review to test the increment
+                against the brief, found bugs, and fixed them before adding the
+                next page. The retrospective step happened informally: after each
+                sprint I listed what had cost me the most time, which is where
+                both bugs below come from.
+            </p>
+        </section>
+
+        <!-- ================= Part 2: sprint table ================= -->
+        <section class="card">
+            <h2>2. Three week sprint plan</h2>
+
+            <div class="table-wrap">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Sprint</th>
+                            <th>Planning</th>
+                            <th>Analysis</th>
+                            <th>Design</th>
+                            <th>Implementation</th>
+                            <th>Testing and Maintenance</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Week 1<br>Sprint 1</td>
+                            <td>Take the 2.2.1 requirements and turn them into a task list. Decide the page order and the four navigation links.</td>
+                            <td>Work out what "About the App" and "About Me" must contain, and how many images are required.</td>
+                            <td>Choose the layout on paper: header with logo and links, a hero with one image, then stacked white cards. Pick the colour palette from my portfolio site.</td>
+                            <td>Create the repository and folder structure. Build index.html, style.css, home.js with the image cycle.</td>
+                            <td>Open the site in the browser, check the console, test the image button. Fix the broken script path and the missing image files before moving on.</td>
+                        </tr>
+                        <tr>
+                            <td>Week 2<br>Sprint 2</td>
+                            <td>Break 2.2.2 into login, create, update, delete, read and validation, and order them so each one can be tested alone.</td>
+                            <td>Decide where tasks are stored, what a task record must contain, and which fields are required.</td>
+                            <td>Design the two-state page: login card first, task area hidden until sign in. Form on top, table below, clock in the footer.</td>
+                            <td>Build the login gate, then the task form, table, edit mode, delete confirmation, validation messages and the live clock.</td>
+                            <td>Run the validation cases: empty fields, impossible date, overdue task. Confirm edit does not create a duplicate row and that delete asks first.</td>
+                        </tr>
+                        <tr>
+                            <td>Week 3<br>Sprint 3</td>
+                            <td>Plan the blog and the ethics page, then the README and the submission package.</td>
+                            <td>Read the Agile brief, decide which two bugs are worth writing up, and check what the README must contain.</td>
+                            <td>Design a readable blog: numbered sections, a wide sprint table that scrolls sideways, one bordered block per bug.</td>
+                            <td>Write blog.html, ethics.html, the README, then prepare the repository for submission.</td>
+                            <td>Test in a second browser, check every internal link, confirm all images load, export the ZIP and submit.</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- ================= Part 3: the two bugs ================= -->
+        <section class="card">
+            <h2>3. Two development errors</h2>
+
+            <!-- ---------- Bug 1 ---------- -->
+            <div class="bug-block">
+                <h3>Bug 1: the script was loaded twice and the page stopped running</h3>
+
+                <p>
+                    <strong>Date and time it appeared:</strong> 15 November 2026,
+                    14:55<br>
+                    <strong>Symptom:</strong> after tidying up the script tags on
+                    the home page, the image button stopped working and the
+                    console showed the error below.
+                </p>
+
+                <figure class="screenshot">
+                    <img src="../images/error-1-before.png" alt="Edge console showing SyntaxError: Identifier 'currentFile' has already been declared">
+                    <figcaption>Console error on the home page, before the fix</figcaption>
+                </figure>
+
+                <p><strong>The code that caused it</strong> - the same file included twice:</p>
+                <pre class="code-block">&lt;script src="../js/common.js"&gt;&lt;/script&gt;
+&lt;script src="../js/common.js"&gt;&lt;/script&gt;
+&lt;script src="../js/home.js"&gt;&lt;/script&gt;</pre>
+
+                <p>
+                    <strong>Date and time it was fixed:</strong> 15 November 2026,
+                    15:05
+                </p>
+
+                <figure class="screenshot">
+                    <img src="../images/error-1-after.png" alt="Edge console with no errors and the image button working again">
+                    <figcaption>Same page after the fix, console is clean</figcaption>
+                </figure>
+
+                <p><strong>The corrected code</strong> - one include only:</p>
+                <pre class="code-block">&lt;script src="../js/common.js"&gt;&lt;/script&gt;
+&lt;script src="../js/home.js"&gt;&lt;/script&gt;</pre>
+
+                <p>
+                    <strong>Explanation.</strong> common.js declares
+                    <code>const currentFile</code> and <code>const navLinks</code>.
+                    Loading the file a second time runs those declarations again
+                    in the same global scope, and a <code>const</code> can only
+                    be declared once. The browser therefore threw a
+                    <code>SyntaxError</code> and abandoned the rest of the script,
+                    which also killed the button listener that home.js was
+                    supposed to attach. The cause was a copy and paste mistake
+                    while reorganising the script tags: I pasted the helper line
+                    twice and did not read the console before assuming the
+                    JavaScript itself was broken. To find it I opened the console,
+                    read the file name and line number in the message, and matched
+                    the variable back to common.js. The fix was to delete the
+                    duplicate line. A side effect worth knowing: a cancelled script
+                    does not roll back, so the second home.js listener was never
+                    registered either.
+                    <br>
+                    <strong>Resources used:</strong> MDN, "SyntaxError: redeclaration
+                    of non-configurable global property";
+                    Microsoft Edge DevTools console documentation.
+                </p>
+            </div>
+
+            <!-- ---------- Bug 2 ---------- -->
+            <div class="bug-block">
+                <h3>Bug 2: the form submitted for real and wiped everything</h3>
+
+                <p>
+                    <strong>Date and time it appeared:</strong> 15 November 2026,
+                    15:30<br>
+                    <strong>Symptom:</strong> pressing "Add task" reloaded the page,
+                    the task never appeared in the table, and the fields were
+                    cleared. Nothing was written to storage.
+                </p>
+
+                <figure class="screenshot">
+                    <img src="../images/error-2-before.png" alt="Page reloading after the form is submitted, task not added">
+                    <figcaption>After pressing Add task, the page reloaded and the list stayed empty</figcaption>
+                </figure>
+
+                <p><strong>The code that caused it</strong> - no call to preventDefault:</p>
+                <pre class="code-block">function handleTaskSubmit(event) {
+    // Missing: event.preventDefault()
+    if (!validateForm()) {
+        return;
+    }
+    tasks.push({ title: taskTitle.value.trim() });
+    saveTasks();
+}</pre>
+
+                <p>
+                    <strong>Date and time it was fixed:</strong> 15 November 2026,
+                    15:38
+                </p>
+
+                <figure class="screenshot">
+                    <img src="../images/error-2-after.png" alt="Task added to the table without the page reloading">
+                    <figcaption>After the fix, the task is added and the page stays put</figcaption>
+                </figure>
+
+                <p><strong>The corrected code</strong> - the default action is cancelled first:</p>
+                <pre class="code-block">function handleTaskSubmit(event) {
+    // Stop the browser submitting the form and reloading the page.
+    event.preventDefault();
+
+    if (!validateForm()) {
+        return;
+    }
+    tasks.push({ title: taskTitle.value.trim() });
+    saveTasks();
+}</pre>
+
+                <p>
+                    <strong>Explanation.</strong> A <code>&lt;form&gt;</code> without
+                    <code>action</code> still has a default behaviour: on submit the
+                    browser navigates to the current URL and rebuilds the document
+                    from scratch. Every variable in JavaScript, including the
+                    <code>tasks</code> array that had just been updated, is thrown
+                    away at that moment, and that is why the task vanished even
+                    though the code that added it had already run. It also made the
+                    bug look like a storage problem when it was really a navigation
+                    problem. The fix is a single line,
+                    <code>event.preventDefault()</code>, called before anything else
+                    so the handler owns the submit. I found the cause by watching the
+                    request panel in DevTools: a document request fired every time
+                    the button was pressed, which is a form submission, not
+                    JavaScript. Since fixing it I have kept the handler short and put
+                    the cancel first, so it cannot be forgotten behind an early
+                    <code>return</code>.
+                    <br>
+                    <strong>Resources used:</strong> MDN, "Event.preventDefault()" and
+                    "HTMLFormElement: submit event"; MDN, "Sending form data".
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="site-footer">
+        <p>StudyTrack &middot; INFO1012 Information Technology Systems &middot; Assessment 3.1 &middot; Jiaxin He</p>
+    </footer>
+
+</body>
+</html>
